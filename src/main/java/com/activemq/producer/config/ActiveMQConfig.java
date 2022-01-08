@@ -24,6 +24,12 @@ public class ActiveMQConfig {
     @Value("${active-mq.broker-topic}")
     private String brokerTopic;
 
+    @Value("${active-mq.broker-username}")
+    private String username;
+
+    @Value("${active-mq.broker-password}")
+    private String password;
+
     @Bean
     public Queue queue() {
         return new ActiveMQQueue(brokerQueue);
@@ -38,6 +44,8 @@ public class ActiveMQConfig {
     public ConnectionFactory connectionFactory(){
         ActiveMQConnectionFactory activeMQConnectionFactory  = new ActiveMQConnectionFactory();
         activeMQConnectionFactory.setBrokerURL(brokerUrl);
+        activeMQConnectionFactory.setUserName(username);
+        activeMQConnectionFactory.setPassword(password);
         return  activeMQConnectionFactory;
     }
 
